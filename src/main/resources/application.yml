@@ -1,0 +1,19 @@
+#Infirmations de connexion BDD
+spring:
+  datasource:
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/demo}
+#    url: ${JDBC_DATABASE_URL:jdbc:mysql://localhost:8889/demo}
+    username: demo
+    password: demo
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+
