@@ -26,7 +26,7 @@ public class Ask {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "ask")
-    private List<Anwser> answers = new ArrayList<>();
+    private List<Answer> answers = new ArrayList<>();
 
     @Column(name = "total_polling")
     private int total_polling;
@@ -63,11 +63,11 @@ public class Ask {
         this.quizz = quizz;
     }
 
-    public List<Anwser> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Anwser> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 

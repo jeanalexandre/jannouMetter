@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "anwser")
-public class Anwser {
+public class Answer {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
