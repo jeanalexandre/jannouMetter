@@ -1,0 +1,14 @@
+language: java
+jdk: oraclejdk8
+services:
+- postgresql
+before_install:
+- psql -c "CREATE DATABASE demo;" -U postgres
+- psql -c "CREATE USER demo WITH PASSWORD 'demo';" -U postgres
+notifications:
+  slack: masteriii2018:xsHaO4CZ3aUs5Z6oDfAEbWye
+deploy:
+  provider: heroku
+  api_key:
+    secure: Dq0QytnmOqVHAIZJxz14VsBFp/jwlVJhoepH5js0U7QMmv+5aemCVHDp8AJFIu2gQ8wS5CTfcZepClrXRSIYI2NwJ/HY1KxN13ZaxC8meFN92Bj41vtVWQbjGBtJ+YSHnqdsZZkt6XPRT7VPcRxi/Z1Ytz8wPPFGk0A7PNJ6zoXmGIqQFroCWe//Ack6NtZXotxu4Q0ev9Ttqwf8QhaoD0W8w7coNngBlghZBxsk9/CvxRSNDMZaLOo1HFKc2Trk4O5Z16geM7lhlxxFHqIc03o3s07FwZxs7LTZoPhnyevsCgXlaQ886QLRJuCki3Oo0GbQLMGVgkZcF9fkxv6EhKOTmmCVnD0nu9SOL9T0jBmBmiF9spYWWvAgqyoDCEZqsh/kEhruZ5AU7RZTk6FYHS6B3sqOozEJXDXGr4H6pcmbKsLCMIT4RWEsbo1B2Yvyg+p5EYXHcyIFD+fIuINp3a6cxOVxJ2OK4m+d2LfW38pxlpA15rfwtSFvgUwyqpCQNIp79Evdny8ADVnIY5knNDZAx7ErSlnPVoh0C+6B0cMV61+BbnWkAJXNm4zrqYdOLG835u24cw8AdXvge6e8tcTZA2GwbkcmKBw1aojyS4AkODwU34c2dmKyfYpW+87MFwl3pJ/k3h4jhDTJrm3Iu2rW0boWrirV2PNeQp7BsYs=
+  app: jannoumeter
