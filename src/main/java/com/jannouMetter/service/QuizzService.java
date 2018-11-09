@@ -5,6 +5,7 @@ import com.jannouMetter.dao.QuizzRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuizzService {
@@ -17,5 +18,13 @@ public class QuizzService {
 
     public List<Quizz> getAll() {
         return this.quizzRepository.findAll();
+    }
+
+    public Optional<Quizz> getById(Long id) {
+        return this.quizzRepository.findById(id);
+    }
+
+    public Quizz create(Quizz quizz) {
+        return this.quizzRepository.save(quizz);
     }
 }
