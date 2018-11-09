@@ -11,7 +11,7 @@ public class Ask {
     @Id
     @Column(name = "id", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(name = "entitled")
     private String entitled;
@@ -31,11 +31,11 @@ public class Ask {
     @Column(name = "total_polling")
     private int total_polling;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
