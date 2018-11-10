@@ -1,5 +1,7 @@
 package com.jannouMetter.bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,14 +10,15 @@ public class Answer {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "entitled")
     private String entitled;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ask_id", nullable = false)
+    @JoinColumn(name = "ask_id", nullable = false, updatable = false)
     private Ask ask;
 
     @Column(name = "polling")

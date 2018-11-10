@@ -1,5 +1,7 @@
 package com.jannouMetter.bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ public class Ask {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "entitled")
@@ -19,8 +21,9 @@ public class Ask {
     @Column(name = "type")
     private String type;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quizz_id", nullable = false)
+    @JoinColumn(name = "quizz_id", nullable = false, updatable = false)
     private Quizz quizz;
 
     @OneToMany(cascade = CascadeType.ALL,
