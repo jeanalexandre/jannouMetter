@@ -3,6 +3,8 @@ package com.jannouMetter.resource;
 import com.jannouMetter.bo.Answer;
 import com.jannouMetter.bo.Ask;
 import com.jannouMetter.service.AskService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/asks")
+@Api(value = "Asks", description = "Asks")
 public class AskResource {
 
     private AskService askService;
@@ -20,12 +23,14 @@ public class AskResource {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "Return all Asks")
     public ResponseEntity<List<Ask>> getAllAsk() {
         return new ResponseEntity<>(this.askService.getAll(), HttpStatus.OK
         );
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "Return an Ask")
     public ResponseEntity<Ask> getAskById(@PathVariable("id") Long id) {
         return this.askService.getById(id)
                 .map( response -> ResponseEntity.ok().body(response))
@@ -33,6 +38,7 @@ public class AskResource {
     }
 
     @RequestMapping(path = "/{id}/answers", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value = "Add a question answer")
     public ResponseEntity<Ask> addAnswer(@RequestBody Answer answer, @PathVariable("id") Long id) {
         return this.askService.getById(id)
                 .map(response -> ResponseEntity.ok().body(this.askService.addAnswer(response, answer)))
