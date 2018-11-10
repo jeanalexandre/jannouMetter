@@ -1,5 +1,7 @@
 package com.jannouMetter.bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +12,8 @@ public class Ask {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @Column(name = "entitled")
     private String entitled;
@@ -19,23 +21,24 @@ public class Ask {
     @Column(name = "type")
     private String type;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quizz_id", nullable = false)
+    @JoinColumn(name = "quizz_id", nullable = false, updatable = false)
     private Quizz quizz;
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "ask")
-    private List<Anwser> answers = new ArrayList<>();
+    private List<Answer> answers = new ArrayList<>();
 
     @Column(name = "total_polling")
     private int total_polling;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,11 +66,11 @@ public class Ask {
         this.quizz = quizz;
     }
 
-    public List<Anwser> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Anwser> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 
