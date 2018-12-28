@@ -33,4 +33,23 @@ public class AskService {
         answerRepository.save(answer);
         return ask;
     }
+
+    public Ask poll(Ask ask, Long idAnswer) {
+        ask.getAnswers().stream()
+                .filter( answer -> answer.getId() == idAnswer)
+                .findFirst().get().addPolling();
+        ask.addPolling();
+        askRepository.save(ask);
+        return ask;
+    }
+
+    public Ask poll(Ask ask, String value) {
+        Answer answer = new Answer();
+        answer.setEntitled(value);
+        answer.setAsk(ask);
+        answer.setPolling(1);
+        ask.addPolling();
+        answerRepository.save(answer);
+        return ask;
+    }
 }

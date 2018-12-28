@@ -55,4 +55,6 @@ public class Answer {
     public void setPolling(int polling) {
         this.polling = polling;
     }
+
+    public void addPolling() { this.polling++; }
 }

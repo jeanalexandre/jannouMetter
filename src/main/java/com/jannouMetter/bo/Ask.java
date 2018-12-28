@@ -81,4 +81,6 @@ public class Ask {
     public void setTotal_polling(int total_polling) {
         this.total_polling = total_polling;
     }
+
+    public void addPolling() { this.total_polling++; }
 }
