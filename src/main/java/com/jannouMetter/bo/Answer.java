@@ -22,7 +22,7 @@ public class Answer {
     private Ask ask;
 
     @Column(name = "polling")
-    private int polling;
+    private Integer polling;
 
     public Long getId() {
         return id;
@@ -48,11 +48,11 @@ public class Answer {
         this.ask = ask;
     }
 
-    public int getPolling() {
+    public Integer getPolling() {
         return polling;
     }
 
-    public void setPolling(int polling) {
+    public void setPolling(Integer polling) {
         this.polling = polling;
     }
 

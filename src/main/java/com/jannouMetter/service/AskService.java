@@ -38,7 +38,10 @@ public class AskService {
         ask.getAnswers().stream()
                 .filter( answer -> answer.getId() == idAnswer)
                 .findFirst().get().addPolling();
-        ask.addPolling();
+        int askPolling = ask.addPolling();
+        if (askPolling == ask.getQuizz().getNbContributors()) {
+            ask.setStateDone();
+        }
         askRepository.save(ask);
         return ask;
     }

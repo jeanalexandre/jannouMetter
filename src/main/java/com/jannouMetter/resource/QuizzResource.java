@@ -51,9 +51,17 @@ public class QuizzResource {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @RequestMapping(path = "/{id}/next", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "Go to the next step of the quiz")
+    public ResponseEntity<Quizz> next(@PathVariable("id") Long id) {
+        return this.quizzService.getById(id)
+                .map(response -> ResponseEntity.ok().body(this.quizzService.next(response)))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @RequestMapping(path = "/reset", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "Reset the application with initial quizz")
     public ResponseEntity<Quizz> resetQuizz() {
-        return new ResponseEntity<>(this.quizzService.reset(), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.quizzService.reset(), HttpStatus.OK);
     }
 }

@@ -16,10 +16,32 @@ public class Quizz {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "currentAsk")
+    private Integer currentAsk;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "nbContributors")
+    private Integer nbContributors;
+
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "quizz")
     private List<Ask> asks = new ArrayList<>();
+
+    public void next() {
+        if (!asks.isEmpty() && this.currentAsk < asks.size()) {
+            if ("Todo".equals(state)) {
+                this.setState("InProgress");
+                this.currentAsk = 1;
+            } else {
+                currentAsk++;
+            }
+        } else {
+            this.state = "Done";
+        }
+    }
 
     public Long getId() {
         return id;
@@ -43,5 +65,29 @@ public class Quizz {
 
     public void setAsks(List<Ask> asks) {
         this.asks = asks;
+    }
+
+    public Integer getCurrentAsk() {
+        return currentAsk;
+    }
+
+    public void setCurrentAsk(Integer currentAsk) {
+        this.currentAsk = currentAsk;
+    }
+
+    public Integer getNbContributors() {
+        return nbContributors;
+    }
+
+    public void setNbContributors(Integer nbContributors) {
+        this.nbContributors = nbContributors;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
