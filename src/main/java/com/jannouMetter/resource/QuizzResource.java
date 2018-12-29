@@ -50,4 +50,10 @@ public class QuizzResource {
                 .map(response -> ResponseEntity.ok().body(this.quizzService.addAsk(response, ask)))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @RequestMapping(path = "/reset", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "Reset the application with initial quizz")
+    public ResponseEntity<Quizz> resetQuizz() {
+        return new ResponseEntity<>(this.quizzService.reset(), HttpStatus.CREATED);
+    }
 }
