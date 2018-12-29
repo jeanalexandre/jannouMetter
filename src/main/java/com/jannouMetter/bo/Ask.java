@@ -34,6 +34,12 @@ public class Ask {
     @Column(name = "total_polling")
     private int total_polling;
 
+    @Column(name = "sort_order")
+    private Integer sort_order;
+
+    @Column(name = "state")
+    private String state;
+
     public Long getId() {
         return id;
     }
@@ -82,5 +88,31 @@ public class Ask {
         this.total_polling = total_polling;
     }
 
-    public void addPolling() { this.total_polling++; }
+    public int addPolling() {
+        return ++this.total_polling;
+    }
+
+    public Integer getSort_order() {
+        return sort_order;
+    }
+
+    public void setSort_order(Integer sort_order) {
+        this.sort_order = sort_order;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setStateDone() {
+        this.state = "Done";
+    }
+
+    public void setStateInProgress() {
+        this.state = "InProgress";
+    }
 }
