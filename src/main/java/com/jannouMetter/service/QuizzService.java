@@ -43,6 +43,19 @@ public class QuizzService {
 
     public Quizz next(Quizz quizz) {
         quizz.next();
+        quizzRepository.save(quizz);
+        return quizz;
+    }
+
+    public Quizz subscribe(Quizz quizz) {
+        quizz.subscribe();
+        quizzRepository.save(quizz);
+        return quizz;
+    }
+
+    public Quizz unsubscribe(Quizz quizz) {
+        quizz.unsubscribe();
+        quizzRepository.save(quizz);
         return quizz;
     }
 
