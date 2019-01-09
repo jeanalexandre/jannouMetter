@@ -43,6 +43,16 @@ public class Quizz {
         }
     }
 
+    public void subscribe() {
+        this.nbContributors++;
+    }
+
+    public void unsubscribe() {
+        if (nbContributors > 0) {
+            this.nbContributors--;
+        }
+    }
+
     public Long getId() {
         return id;
     }
