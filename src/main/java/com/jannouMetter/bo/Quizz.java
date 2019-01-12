@@ -1,5 +1,7 @@
 package com.jannouMetter.bo;
 
+import org.springframework.core.annotation.Order;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +30,15 @@ public class Quizz {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "quizz")
+    @OrderBy("id ASC")
     private List<Ask> asks = new ArrayList<>();
 
     public void next() {
         if (!asks.isEmpty() && this.currentAsk < asks.size()) {
-            if ("Todo".equals(state)) {
+            if ("ToDo".equals(state)) {
                 this.setState("InProgress");
-                this.currentAsk = 1;
-            } else {
-                currentAsk++;
             }
+            currentAsk++;
         } else {
             this.state = "Done";
         }

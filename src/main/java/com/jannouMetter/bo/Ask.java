@@ -29,6 +29,7 @@ public class Ask {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "ask")
+    @OrderBy("id ASC")
     private List<Answer> answers = new ArrayList<>();
 
     @Column(name = "total_polling")

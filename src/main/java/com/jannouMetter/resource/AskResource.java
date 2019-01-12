@@ -57,7 +57,15 @@ public class AskResource {
     @ApiOperation(value = "Submit an answer for FreeString types of asks")
     public ResponseEntity<Ask> poll(@PathVariable("id") Long id, @PathVariable("answer") String answer) {
         return this.askService.getById(id)
-                .map(response -> ResponseEntity.ok().body(this.askService.poll(response, answer)))
+                .map(response -> ResponseEntity.ok().body(this.askService.pollFreeString(response, answer)))
+                .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+    @RequestMapping(path = "/{id}/isDone", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "Set the ask status of done")
+    public ResponseEntity<Ask> setDone(@PathVariable("id") Long id) {
+        return this.askService.getById(id)
+                .map(response -> ResponseEntity.ok().body(this.askService.setDone(response)))
                 .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 }

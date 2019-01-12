@@ -43,7 +43,7 @@ public class QuizzResource {
         return new ResponseEntity<>(this.quizzService.create(quizz), HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "/{id}/subscribe", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(path = "/{id}/subscribe", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "Subscribe to quiz")
     public ResponseEntity<Quizz> subscribe(@PathVariable("id") Long id) {
         return this.quizzService.getById(id)
@@ -51,7 +51,7 @@ public class QuizzResource {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @RequestMapping(path = "/{id}/unsubscribe", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(path = "/{id}/unsubscribe", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "Unsubscribe to quiz")
     public ResponseEntity<Quizz> unsubscribe(@PathVariable("id") Long id) {
         return this.quizzService.getById(id)

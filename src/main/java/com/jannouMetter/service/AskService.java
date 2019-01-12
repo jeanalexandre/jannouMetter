@@ -35,18 +35,19 @@ public class AskService {
     }
 
     public Ask poll(Ask ask, Long idAnswer) {
-        ask.getAnswers().stream()
-                .filter( answer -> answer.getId() == idAnswer)
-                .findFirst().get().addPolling();
-        int askPolling = ask.addPolling();
-        if (askPolling == ask.getQuizz().getNbContributors()) {
-            ask.setStateDone();
+        if (this.answerRepository.findById(idAnswer).isPresent()) {
+            this.answerRepository.findById(idAnswer).get().addPolling();
+            int askPolling = ask.addPolling();
+            if (askPolling == ask.getQuizz().getNbContributors()) {
+                ask.setStateDone();
+            }
+            askRepository.save(ask);
+            return ask;
         }
-        askRepository.save(ask);
-        return ask;
+        return null;
     }
 
-    public Ask poll(Ask ask, String value) {
+    public Ask pollFreeString(Ask ask, String value) {
         Answer answer = new Answer();
         answer.setEntitled(value);
         answer.setAsk(ask);
@@ -54,5 +55,10 @@ public class AskService {
         ask.addPolling();
         answerRepository.save(answer);
         return ask;
+    }
+
+    public Ask setDone(Ask ask) {
+        ask.setStateDone();
+        return askRepository.save(ask);
     }
 }
