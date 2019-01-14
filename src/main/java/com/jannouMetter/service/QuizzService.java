@@ -68,7 +68,7 @@ public class QuizzService {
         quizzRepository.deleteAll();
 
         Quizz quizz = new Quizz();
-        quizz.setName("FUTURA QUIZZ");
+        quizz.setName("FUTURA QUIZ");
         quizz.setCurrentAsk(0);
         quizz.setNbContributors(0);
         quizz.setState("ToDo");

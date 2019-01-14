@@ -52,7 +52,10 @@ public class AskService {
         answer.setEntitled(value);
         answer.setAsk(ask);
         answer.setPolling(1);
-        ask.addPolling();
+        int askPolling = ask.addPolling();
+        if (askPolling == ask.getQuizz().getNbContributors()) {
+            ask.setStateDone();
+        }
         answerRepository.save(answer);
         return ask;
     }
