@@ -1,7 +1,7 @@
 #Infirmations de connexion BDD
 spring:
   datasource:
-    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/demo}
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://project-postgresql:5432/demo}
 #    url: ${JDBC_DATABASE_URL:jdbc:mysql://localhost:8889/demo}
     username: demo
     password: demo
