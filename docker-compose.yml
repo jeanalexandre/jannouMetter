@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # Creation d'un conteneur postgres pour la bdd
   project-postgresql:
     image: postgres:9.6.5
     environment:
@@ -7,3 +8,26 @@ services:
     - POSTGRES_PASSWORD=demo
     ports:
     - 5432:5432
+    networks:
+        - network1
+
+  # Creation d'un conteneur poru l'app java
+  app-java:
+    # Ne sera lancee qu'une fois le lancement de project-postgresql terminee
+    depends_on:
+      - project-postgresql
+    build: .
+    # Fera partie du network1 pour communiquer avec la bdd
+    # Fera partie du newtork 'web' (cree au prealable) pour y etre expose et accessible depuis l'exterieur
+    networks:
+      - network1
+      - web
+    ports:
+      - 80:8080
+
+networks:
+  # Specifie que le network web est accessible depuis l'exterieur
+  web:
+    external: true
+  network1:
+
