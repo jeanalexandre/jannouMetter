@@ -16,5 +16,5 @@ WORKDIR /java-jar
 # On copie tout les .jar genere par le build dans java-jar (emplacement courant)
 RUN cp /java-app/target/*.jar /java-jar
 
-# On demarre l'app en lancant demarrant l'app
+# On demarre l'app en demarrant l'app
 CMD ["java", "-jar", "app.jar"]
